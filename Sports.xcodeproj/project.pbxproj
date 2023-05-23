@@ -24,6 +24,9 @@
 		F73189202A1AB59000C76264 /* CheckNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F731891F2A1AB59000C76264 /* CheckNetwork.swift */; };
 		F73189222A1AC4E200C76264 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73189212A1AC4E200C76264 /* DBManager.swift */; };
 		F73189242A1ACA3F00C76264 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73189232A1ACA3F00C76264 /* Event.swift */; };
+		F73189662A1BC4A300C76264 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73189652A1BC4A300C76264 /* DetailsViewController.swift */; };
+		F731896B2A1BCCA800C76264 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73189692A1BCCA800C76264 /* DetailsCollectionViewCell.swift */; };
+		F731896C2A1BCCA800C76264 /* DetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F731896A2A1BCCA800C76264 /* DetailsCollectionViewCell.xib */; };
 		F78B0DB22A191CF300C9657A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B0DB12A191CF300C9657A /* AppDelegate.swift */; };
 		F78B0DB42A191CF300C9657A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B0DB32A191CF300C9657A /* SceneDelegate.swift */; };
 		F78B0DB62A191CF300C9657A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B0DB52A191CF300C9657A /* ViewController.swift */; };
@@ -77,6 +80,9 @@
 		F731891F2A1AB59000C76264 /* CheckNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetwork.swift; sourceTree = "<group>"; };
 		F73189212A1AC4E200C76264 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		F73189232A1ACA3F00C76264 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		F73189652A1BC4A300C76264 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		F73189692A1BCCA800C76264 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F731896A2A1BCCA800C76264 /* DetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCollectionViewCell.xib; sourceTree = "<group>"; };
 		F78B0DAE2A191CF300C9657A /* Sports.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sports.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78B0DB12A191CF300C9657A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F78B0DB32A191CF300C9657A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +251,9 @@
 		F731890C2A1A842C00C76264 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F73189652A1BC4A300C76264 /* DetailsViewController.swift */,
+				F73189692A1BCCA800C76264 /* DetailsCollectionViewCell.swift */,
+				F731896A2A1BCCA800C76264 /* DetailsCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -451,6 +460,7 @@
 			files = (
 				F78B0DBE2A191D0100C9657A /* LaunchScreen.storyboard in Resources */,
 				F726AC3F2A19642200EE5655 /* TableViewCell.xib in Resources */,
+				F731896C2A1BCCA800C76264 /* DetailsCollectionViewCell.xib in Resources */,
 				F78B0DBB2A191D0100C9657A /* Assets.xcassets in Resources */,
 				F78B0DB92A191CF300C9657A /* Main.storyboard in Resources */,
 			);
@@ -592,7 +602,9 @@
 				F731891C2A1A976B00C76264 /* Response.swift in Sources */,
 				F78B0DB42A191CF300C9657A /* SceneDelegate.swift in Sources */,
 				F78B0DE22A19290A00C9657A /* SportsCollectionViewCell.swift in Sources */,
+				F731896B2A1BCCA800C76264 /* DetailsCollectionViewCell.swift in Sources */,
 				F73189222A1AC4E200C76264 /* DBManager.swift in Sources */,
+				F73189662A1BC4A300C76264 /* DetailsViewController.swift in Sources */,
 				F73189182A1A85D700C76264 /* DetailsViewModel.swift in Sources */,
 				F726AC412A19666400EE5655 /* FavoriteTableViewController.swift in Sources */,
 				F73189002A1A61BB00C76264 /* LeaguesTableViewController.swift in Sources */,

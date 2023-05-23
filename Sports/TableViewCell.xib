@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                <color key="backgroundColor" systemColor="systemGray5Color"/>
                 <constraints>
                     <constraint firstItem="Cfw-dO-qKT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7Hg-25-EYr"/>
                     <constraint firstItem="9kC-3k-0KN" firstAttribute="leading" secondItem="Cfw-dO-qKT" secondAttribute="trailing" constant="20" id="CL5-aX-Lct"/>
@@ -56,8 +56,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
