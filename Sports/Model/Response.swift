@@ -18,4 +18,14 @@ class ResponseEvent : Decodable{
     var result : [Event]?
 }
 
+class ResponseTeam : Decodable {
+    var success : Int?
+    var result : [Team]?
+}
+
+class ResponsePlayer : Decodable{
+    var success : Int?
+    var result : [Player]?
+}
+
 

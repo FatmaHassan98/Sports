@@ -39,9 +39,5 @@ class Event : Decodable{
     var fk_stage_key : Int?
     var stage_name : String?
     var league_group : String?
-    var goalscorers : [String]?
-    var substitutes : [String]?
-    var cards : [String]?
-    var statistics : [String]?
 
 }
