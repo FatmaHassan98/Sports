@@ -22,24 +22,28 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
     var latest : [Event]!
     var teams : [Team]!
     
+    var sportNumber : Int?
+    var leagueId : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let indicatorView = UIActivityIndicatorView(style: .large)
-//        indicatorView.center = self.view.center
-//        self.view.addSubview(indicatorView)
-//        indicatorView.startAnimating()
+        let indicatorView = UIActivityIndicatorView(style: .large)
+        indicatorView.center = self.view.center
+        self.view.addSubview(indicatorView)
+        indicatorView.startAnimating()
         
         detailsViewModel = DetailsViewModel()
         
         detailsViewModel?.bindResultUpComingToViewController = { [weak self] in
             DispatchQueue.main.async {
                 self?.upcoming = self!.detailsViewModel?.resultUpComing
+                indicatorView.stopAnimating()
                 self?.collection.reloadData()
             }
         }
     
-        detailsViewModel?.getUpComingData(sportNumber: 0, leaguesId: 205)
+        detailsViewModel?.getUpComingData(sportNumber: sportNumber ?? 0, leaguesId: leagueId ?? 0)
         
         detailsViewModel?.bindResultLatestToViewController = { [weak self] in
             DispatchQueue.main.async {
@@ -48,7 +52,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
 
-        detailsViewModel?.getLatestData(sportNumber: 0, leaguesId: 205)
+        detailsViewModel?.getLatestData(sportNumber: sportNumber ?? 0, leaguesId: leagueId ?? 0)
         
         detailsViewModel?.bindResultTeamToViewController = { [weak self] in
             DispatchQueue.main.async {
@@ -57,9 +61,11 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
 
-        detailsViewModel?.getTeamData(sportNumber: 0, leaguesId: 205)
+        detailsViewModel?.getTeamData(sportNumber: sportNumber ?? 0, leaguesId: leagueId ?? 0)
 
         self.collection.register(UINib(nibName: "DetailsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "collectionCell")
+        
+        self.collection.register(UINib(nibName: "TeamCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "teamCell")
         
         let layout = UICollectionViewCompositionalLayout {sectionIndex,enviroment in
                     switch sectionIndex {
@@ -79,18 +85,18 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
       
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .absolute(225))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85), heightDimension: .absolute(180))
         
       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize
 , subitems: [item])
         
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0
-          , bottom: 16, trailing: 16)
+          , bottom: 0, trailing: 0)
           
       let section = NSCollectionLayoutSection(group: group)
         
-          section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16
-          , bottom: 16, trailing: 0)
+          section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0
+          , bottom: 0, trailing: 0)
         
           section.orthogonalScrollingBehavior = .continuous
           
@@ -104,11 +110,10 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
              }
         }
             
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        
-            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "header", alignment: .top)
-        
-            section.boundarySupplementaryItems = [headerElement]
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(35))
+                let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                
+                section.boundarySupplementaryItems = [headerSupplementary]
         
          return section
     }
@@ -118,24 +123,25 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             , heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(75)
-            , heightDimension: .absolute(90))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(180)
+            , heightDimension: .absolute(200))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize
             , subitems: [item])
-            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0
-            , bottom: 0, trailing: 15)
+            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15
+            , bottom: 60, trailing: 10)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15
-            , bottom: 10, trailing: 0)
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0
+        , bottom: 10, trailing: 0)
+        
             section.orthogonalScrollingBehavior = .continuous
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "header", alignment: .top)
-        section.boundarySupplementaryItems = [headerElement]
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(35))
+                let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                
+                section.boundarySupplementaryItems = [headerSupplementary]
         
-        
-            
             return section
         }
     
@@ -150,7 +156,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize
             , subitems: [item])
             group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0
-            , bottom: 8, trailing: 0)
+            , bottom: 10, trailing: 0)
             
         let section = NSCollectionLayoutSection(group: group)
         
@@ -158,9 +164,10 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             , bottom: 10, trailing: 15)
         
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "header", alignment: .top)
-        section.boundarySupplementaryItems = [headerElement]
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(35))
+                let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                
+                section.boundarySupplementaryItems = [headerSupplementary]
             
             return section
         }
@@ -200,7 +207,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             
             cell.dateMatch.text = upcoming[indexPath.row].event_date
             cell.timeMatch.text = upcoming[indexPath.row].event_time
-            cell.result.text = upcoming[indexPath.row].event_ft_result
+            cell.result.text = "VS"
             
         }else if indexPath.section == 1 {
             cell.firstImage.layer.cornerRadius = cell.firstImage.frame.height/2
@@ -221,12 +228,47 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             cell.result.text = latest[indexPath.row].event_ft_result
         }else{
             
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCollectionViewCell
+            
+            cell.teamImage.kf.setImage(
+                with: URL(string: teams[indexPath.row].team_logo ?? ""),
+                placeholder: UIImage(named: "placeHolder"))
+            
+            cell.teamName.text = teams[indexPath.row].team_name
+            
+            cell.teamImage.layer.cornerRadius = 30
+            
+            cell.layer.cornerRadius = 30
+            cell.layer.masksToBounds = true
+            
+            return cell
         }
         
+        cell.layer.cornerRadius = 30
+        cell.layer.masksToBounds = true
         
         return cell
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            
+            if kind == UICollectionView.elementKindSectionHeader {
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderCollectionReusableView
+                
+                if indexPath.section == 0 {
+                    
+                    header.headerTitle.text = "Up Coming Events"
+                }else if indexPath.section == 1{
+                    header.headerTitle.text = "Latest Results"
+                }else{
+                    header.headerTitle.text = "Teams"
+                }
+                
+                return header
+            }
+            return UICollectionReusableView()
+        }
     
 
 }

@@ -54,4 +54,24 @@ class FavoriteTableViewController: UITableViewController {
         
     }
     
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        CheckNetwork.checkNetwork(compilitationHandler: { [weak self] network in
+            if network! {
+                let details = (self?.storyboard?.instantiateViewController(withIdentifier: "details")) as! DetailsViewController
+                
+                details.sportNumber = indexPath.row
+               // details.leagueId = self?.sports![indexPath.row].league_key
+                
+                self?.present(details, animated: true)
+                
+            }else{
+                let alert : UIAlertController = UIAlertController(title: "Attention", message: "Please, check your connection", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                self?.present(alert, animated: true)
+            }
+        })
+    }
 }
