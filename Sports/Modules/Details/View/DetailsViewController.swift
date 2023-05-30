@@ -10,12 +10,9 @@ import Kingfisher
 
 class DetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var back: UIBarButtonItem!
-    
-    @IBOutlet weak var favorite: UIBarButtonItem!
-    
     @IBOutlet weak var collection: UICollectionView!
     
+    @IBOutlet weak var fav: UIBarButtonItem!
     var detailsViewModel : DetailsViewModel?
     
     var upcoming : [Event]!
@@ -24,6 +21,19 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     var sportNumber : Int?
     var leagueId : Int?
+    var name : String?
+    var image : String?
+    
+
+    override func viewWillAppear(_ animated: Bool) {
+        let sport : [FavoriteSport]? = detailsViewModel?.getFavorite()
+        
+        for i in 0..<(sport?.count ?? 0){
+            if(sport?[i].leaguesId == leagueId  ){
+                fav.image = UIImage(systemName: "heart.fill")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +120,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
              }
         }
             
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(35))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(25))
                 let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 
                 section.boundarySupplementaryItems = [headerSupplementary]
@@ -270,5 +280,70 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             return UICollectionReusableView()
         }
     
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 2{
+            CheckNetwork.checkNetwork(compilitationHandler: { [weak self] network in
+                if network! {
+                    
+                    let players = self?.storyboard?.instantiateViewController(withIdentifier: "players") as! PlayersViewController
+                    
+                    players.sportNumber = self?.sportNumber
+                    players.teamKey = self?.teams[indexPath.row].team_key
+                    
+                    self?.present(players, animated: true)
+                    
+                }else{
+                    let alert : UIAlertController = UIAlertController(title: "Attention", message: "Please, check your connection", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    
+                    self?.present(alert, animated: true)
+                }
+            })
+            
+        }
+    }
+    
+    
+    @IBAction func back(_ sender: Any) {
+        
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    @IBAction func favorite(_ sender: Any) {
+        
+        var sport : [FavoriteSport] = []
+        sport = detailsViewModel?.getFavorite() ?? []
+        
+        if sport.isEmpty{
+            fav.image = UIImage(systemName: "heart.fill")
+            let favorite = FavoriteSport()
+            favorite.image = self.image ?? ""
+            favorite.name = self.name ?? ""
+            favorite.sportNumber = self.sportNumber ?? 0
+            favorite.leaguesId = self.leagueId ?? 0
+            
+            detailsViewModel?.insertFavorite(favorite: favorite)
+        }else{
+            for i in sport{
+                
+                if(i.leaguesId == self.leagueId && i.sportNumber == self.sportNumber){
+                    
+                }else{
+                    fav.image = UIImage(systemName: "heart.fill")
+                    let favorite = FavoriteSport()
+                    favorite.image = self.image ?? ""
+                    favorite.name = self.name ?? ""
+                    favorite.sportNumber = self.sportNumber ?? 0
+                    favorite.leaguesId = self.leagueId ?? 0
+                    
+                    detailsViewModel?.insertFavorite(favorite: favorite)
+                }
+            }
+        }
+    }
+    
 }

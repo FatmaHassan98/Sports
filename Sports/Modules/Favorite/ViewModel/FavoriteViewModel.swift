@@ -9,4 +9,13 @@ import Foundation
 
 class FavoriteViewModel{
     
+    
+    func getFavorite()-> [FavoriteSport]{
+        return DBManager.shared.fetchFavorite()
+    }
+    
+    func deleteFavorite(id : Int){
+        DBManager.shared.deleteFavorite(id: id)
+    }
+    
 }

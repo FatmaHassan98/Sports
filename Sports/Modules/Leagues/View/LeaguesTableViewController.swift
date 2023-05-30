@@ -87,8 +87,12 @@ class LeaguesTableViewController: UITableViewController {
                 if self?.sportNumber != 3{
                     let details = (self?.storyboard?.instantiateViewController(withIdentifier: "details")) as! DetailsViewController
                     
+                    details.modalPresentationStyle = .fullScreen
+                    
                     details.sportNumber = self?.sportNumber
                     details.leagueId = self?.sports[indexPath.row].league_key
+                    details.name = self?.sports[indexPath.row].league_name
+                    details.image = self?.sports[indexPath.row].league_logo
                     
                     self?.present(details, animated: true)
                 }

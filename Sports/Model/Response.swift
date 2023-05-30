@@ -8,7 +8,6 @@
 import Foundation
 
 class Response : Decodable {
-    
     var success : Int?
     var result : [League]?
 }
@@ -25,7 +24,7 @@ class ResponseTeam : Decodable {
 
 class ResponsePlayer : Decodable{
     var success : Int?
-    var result : [Player]?
+    var result : [Team]?
 }
 
 

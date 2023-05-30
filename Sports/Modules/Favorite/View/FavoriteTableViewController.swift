@@ -9,16 +9,22 @@ import UIKit
 
 class FavoriteTableViewController: UITableViewController {
 
-    var sports : [String]?
+    var sports : [FavoriteSport]?
+    
+    var viewModel : FavoriteViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sports = ["Football", "Basketball", "Cricket", "Tennis"]
-
+        viewModel = FavoriteViewModel()
+        
         self.tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
         navigationItem.title = "Favorite"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        sports = viewModel?.getFavorite()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,12 +37,15 @@ class FavoriteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
+                
+        cell.cellImage.kf.setImage(
+            with: URL(string: sports?[indexPath.row].image ?? ""),
+            placeholder: UIImage(named: "placeHolder"))
         
-        cell.cellImage.image = UIImage(named: sports?[indexPath.row] ?? "")
         cell.cellImage.layer.cornerRadius = 15
         
         
-        cell.cellTitle.text = sports?[indexPath.row] ?? ""
+        cell.cellTitle.text = sports?[indexPath.row].name ?? ""
         
         return cell
     }
@@ -60,8 +69,10 @@ class FavoriteTableViewController: UITableViewController {
             if network! {
                 let details = (self?.storyboard?.instantiateViewController(withIdentifier: "details")) as! DetailsViewController
                 
-                details.sportNumber = indexPath.row
-               // details.leagueId = self?.sports![indexPath.row].league_key
+                details.sportNumber = self?.sports?[indexPath.row].sportNumber ?? 0
+                details.leagueId = self?.sports?[indexPath.row].leaguesId ?? 0
+                
+                details.modalPresentationStyle = .fullScreen
                 
                 self?.present(details, animated: true)
                 
@@ -74,4 +85,25 @@ class FavoriteTableViewController: UITableViewController {
             }
         })
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let alert : UIAlertController = UIAlertController(title: "Attention", message: "Please, Enter All Data", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "No", style: .default,handler: nil))
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: .default , handler: { action in
+                
+                self.viewModel?.deleteFavorite(id: indexPath.row)
+                self.sports = []
+                self.sports = self.viewModel?.getFavorite()
+                tableView.reloadData()
+                
+            }))
+            self.present(alert, animated: true)
+            
+        }
+        
+    }
+      
 }

@@ -58,4 +58,12 @@ class DetailsViewModel{
             self?.resultTeam = result?.result
         }
     }
+    
+    func insertFavorite(favorite : FavoriteSport){
+        DBManager.shared.insertFavorite(favorite: favorite)
+    }
+    
+    func getFavorite()-> [FavoriteSport]{
+        return DBManager.shared.fetchFavorite()
+    }
 }
