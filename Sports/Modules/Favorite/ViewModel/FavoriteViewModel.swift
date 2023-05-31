@@ -7,8 +7,15 @@
 
 import Foundation
 
-class FavoriteViewModel{
+protocol FavoriteProtocol{
     
+    func getFavorite()-> [FavoriteSport]
+    
+    func deleteFavorite(id : Int)
+    
+}
+
+class FavoriteViewModel : FavoriteProtocol{
     
     func getFavorite()-> [FavoriteSport]{
         return DBManager.shared.fetchFavorite()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Response : Decodable {
+struct Response : Decodable {
     var success : Int?
     var result : [League]?
 }

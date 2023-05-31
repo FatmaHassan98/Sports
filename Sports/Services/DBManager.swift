@@ -65,7 +65,7 @@ class DBManager{
 
             for item in favorite {
 
-                let favorite : FavoriteSport = FavoriteSport()
+                var favorite : FavoriteSport = FavoriteSport()
                 
                 favorite.name =  (item.value(forKey: "name") as? String)
 
@@ -74,8 +74,6 @@ class DBManager{
                 favorite.sportNumber = (item.value(forKey: "sportNumber") as? Int)
 
                 favorite.leaguesId = (item.value(forKey: "leaguesId") as? Int)
-
-                print("tttttt \(String(describing: favorite.name))")
                 
                 favoriteArray.append(favorite)
 

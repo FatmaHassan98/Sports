@@ -49,6 +49,10 @@
 		F78B0DD32A191D0100C9657A /* SportsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B0DD22A191D0100C9657A /* SportsUITests.swift */; };
 		F78B0DD52A191D0100C9657A /* SportsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B0DD42A191D0100C9657A /* SportsUITestsLaunchTests.swift */; };
 		F78B0DE22A19290A00C9657A /* SportsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B0DE12A19290A00C9657A /* SportsCollectionViewCell.swift */; };
+		F7C769962A273DAA00B7EC50 /* FakeNtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C769952A273DAA00B7EC50 /* FakeNtwork.swift */; };
+		F7C769982A27421400B7EC50 /* mockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C769972A27421400B7EC50 /* mockNetworkManager.swift */; };
+		F7C7699C2A27571900B7EC50 /* FackLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C7699B2A27571900B7EC50 /* FackLocal.swift */; };
+		F7C7699E2A275C7200B7EC50 /* TestFavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C7699D2A275C7200B7EC50 /* TestFavoriteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +125,10 @@
 		F78B0DD22A191D0100C9657A /* SportsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsUITests.swift; sourceTree = "<group>"; };
 		F78B0DD42A191D0100C9657A /* SportsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F78B0DE12A19290A00C9657A /* SportsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F7C769952A273DAA00B7EC50 /* FakeNtwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNtwork.swift; sourceTree = "<group>"; };
+		F7C769972A27421400B7EC50 /* mockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mockNetworkManager.swift; sourceTree = "<group>"; };
+		F7C7699B2A27571900B7EC50 /* FackLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FackLocal.swift; sourceTree = "<group>"; };
+		F7C7699D2A275C7200B7EC50 /* TestFavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFavoriteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,8 +402,9 @@
 		F78B0DC72A191D0100C9657A /* SportsTests */ = {
 			isa = PBXGroup;
 			children = (
+				F7C7699A2A27568D00B7EC50 /* ViewModel */,
+				F7C769992A2755FD00B7EC50 /* Network */,
 				F78B0DC82A191D0100C9657A /* SportsTests.swift */,
-				F7197C372A26BDF800B565AC /* TestNetworkTests.swift */,
 			);
 			path = SportsTests;
 			sourceTree = "<group>";
@@ -407,6 +416,25 @@
 				F78B0DD42A191D0100C9657A /* SportsUITestsLaunchTests.swift */,
 			);
 			path = SportsUITests;
+			sourceTree = "<group>";
+		};
+		F7C769992A2755FD00B7EC50 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F7C769952A273DAA00B7EC50 /* FakeNtwork.swift */,
+				F7197C372A26BDF800B565AC /* TestNetworkTests.swift */,
+				F7C769972A27421400B7EC50 /* mockNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F7C7699A2A27568D00B7EC50 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F7C7699B2A27571900B7EC50 /* FackLocal.swift */,
+				F7C7699D2A275C7200B7EC50 /* TestFavoriteViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -687,8 +715,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7C7699E2A275C7200B7EC50 /* TestFavoriteViewModel.swift in Sources */,
 				F7197C382A26BDF900B565AC /* TestNetworkTests.swift in Sources */,
 				F78B0DC92A191D0100C9657A /* SportsTests.swift in Sources */,
+				F7C769982A27421400B7EC50 /* mockNetworkManager.swift in Sources */,
+				F7C7699C2A27571900B7EC50 /* FackLocal.swift in Sources */,
+				F7C769962A273DAA00B7EC50 /* FakeNtwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

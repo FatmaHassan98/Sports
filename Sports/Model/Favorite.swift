@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavoriteSport : Decodable{
+struct FavoriteSport : Decodable{
     
     var name : String?
     var image : String?

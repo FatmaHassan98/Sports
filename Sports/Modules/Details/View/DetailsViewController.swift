@@ -320,7 +320,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         if sport.isEmpty{
             fav.image = UIImage(systemName: "heart.fill")
-            let favorite = FavoriteSport()
+            var favorite = FavoriteSport()
             favorite.image = self.image ?? ""
             favorite.name = self.name ?? ""
             favorite.sportNumber = self.sportNumber ?? 0
@@ -334,7 +334,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
                     
                 }else{
                     fav.image = UIImage(systemName: "heart.fill")
-                    let favorite = FavoriteSport()
+                    var favorite = FavoriteSport()
                     favorite.image = self.image ?? ""
                     favorite.name = self.name ?? ""
                     favorite.sportNumber = self.sportNumber ?? 0
