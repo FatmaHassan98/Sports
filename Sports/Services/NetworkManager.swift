@@ -12,12 +12,12 @@ import Alamofire
 
 protocol NetworkManagerProtocol {
     
-    static func loadDataFromURL <T : Decodable> (url : String? , complitionHandler : @escaping (T?) -> Void)
+    func loadDataFromURL <T : Decodable> (url : String? , complitionHandler : @escaping (T?) -> Void)
 }
 
 class NetworkManage : NetworkManagerProtocol {
     
-    static func loadDataFromURL <T : Decodable> (url : String? , complitionHandler : @escaping (T?) -> Void){
+    func loadDataFromURL <T : Decodable> (url : String? , complitionHandler : @escaping (T?) -> Void){
         
         guard let finalURL = url else {
             return
