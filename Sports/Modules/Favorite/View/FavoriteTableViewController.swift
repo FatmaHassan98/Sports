@@ -25,6 +25,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         sports = viewModel?.getFavorite()
+        self.tableView.reloadData()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -71,6 +72,8 @@ class FavoriteTableViewController: UITableViewController {
                 
                 details.sportNumber = self?.sports?[indexPath.row].sportNumber ?? 0
                 details.leagueId = self?.sports?[indexPath.row].leaguesId ?? 0
+                details.name = self?.sports?[indexPath.row].name ?? ""
+                details.image = self?.sports?[indexPath.row].image ?? ""
                 
                 details.modalPresentationStyle = .fullScreen
                 
@@ -88,7 +91,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            let alert : UIAlertController = UIAlertController(title: "Attention", message: "Please, Enter All Data", preferredStyle: .alert)
+            let alert : UIAlertController = UIAlertController(title: "Attention", message: "Do you went to delete this item?", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "No", style: .default,handler: nil))
             

@@ -24,7 +24,6 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
     var name : String?
     var image : String?
     
-
     override func viewWillAppear(_ animated: Bool) {
         let sport : [FavoriteSport]? = detailsViewModel?.getFavorite()
         
@@ -37,7 +36,7 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         let indicatorView = UIActivityIndicatorView(style: .large)
         indicatorView.center = self.view.center
         self.view.addSubview(indicatorView)
@@ -315,10 +314,9 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     @IBAction func favorite(_ sender: Any) {
         
-        var sport : [FavoriteSport] = []
-        sport = detailsViewModel?.getFavorite() ?? []
-        
-        if sport.isEmpty{
+        if(fav.image == UIImage(systemName: "heart.fill")){
+            
+        }else{
             fav.image = UIImage(systemName: "heart.fill")
             var favorite = FavoriteSport()
             favorite.image = self.image ?? ""
@@ -327,23 +325,8 @@ class DetailsViewController: UIViewController, UICollectionViewDelegate, UIColle
             favorite.leaguesId = self.leagueId ?? 0
             
             detailsViewModel?.insertFavorite(favorite: favorite)
-        }else{
-            for i in sport{
-                
-                if(i.leaguesId == self.leagueId && i.sportNumber == self.sportNumber){
-                    
-                }else{
-                    fav.image = UIImage(systemName: "heart.fill")
-                    var favorite = FavoriteSport()
-                    favorite.image = self.image ?? ""
-                    favorite.name = self.name ?? ""
-                    favorite.sportNumber = self.sportNumber ?? 0
-                    favorite.leaguesId = self.leagueId ?? 0
-                    
-                    detailsViewModel?.insertFavorite(favorite: favorite)
-                }
-            }
         }
+        
     }
     
 }
